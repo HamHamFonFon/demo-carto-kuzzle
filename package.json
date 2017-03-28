@@ -6,12 +6,17 @@
   "author": "Stephane MEAUDRE <smeaudre@kaliop.com>",
   "licence": "MIT",
   "dependencies": {
+    "express": "^4.15.2",
     "kuzzle-sdk": "^3.4.2",
     "openlayers": "^4.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "browserify": "^14.1.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-map": "browserify -e app.js -o ./public/js/app.js"
   },
   "repository": {
     "type": "git",
