@@ -1,5 +1,5 @@
-import config from '../services/config'
-import kuzzleBridge from './kuzzleBridge'
+// import config from '../services/config'
+// import kuzzleBridge from './kuzzleBridge'
 import ol from 'openlayers'
 
 export default
@@ -28,7 +28,7 @@ export default
             title: 'Open Street Map',
             visible: true,
             type: 'overlays',
-            source: new ol.ssource.OSM()
+            source: new ol.source.OSM()
         });
 
         this.state.groupBaseMap = new ol.layer.Group({
