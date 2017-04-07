@@ -1,19 +1,17 @@
 // import config from '../services/config'
 // import kuzzleBridge from './kuzzleBridge'
-import ol from 'openlayers'
+import map from 'ol/map'
 
-export default
-{
+export default {
 
     state: {
         map: null,
         osm: null,
         view: null,
-        zoom: null,
+        zoom: 13,
         groupBaseMap: null,
         groupKuzzleMap: null
     },
-
 
     initMap()
     {
@@ -45,13 +43,10 @@ export default
         });
 
         // Build Map
-        this.state.map = new ol.Map({
+        this.state.map = new Map({
             layers: [this.state.groupBaseMap, this.state.groupKuzzleMap],
             target: 'map',
             view: this.state.view
         });
-
-
-        return this.map;
     }
 }

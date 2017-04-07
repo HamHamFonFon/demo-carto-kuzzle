@@ -1,2 +1,3 @@
-import kuzzleBrige from 'dist/src/kuzzleBridge'
+import map from './dist/src/map';
+map.initMap();
 
