@@ -8,7 +8,7 @@ export default {
         map: null,
         osm: null,
         view: null,
-        zoom: 13,
+        zoom: 10,
         coordinates: null,
         groupBaseMap: null,
         groupKuzzleMap: null
@@ -22,15 +22,16 @@ export default {
         this.state.osm = new ol.layer.Tile({
             title: 'Open Street Map',
             visible: true,
+            type: 'overlays',
             source: new ol.source.OSM()
         });
 
-        this.state.groupBaseMap = new ol.layer.Group({
-            title: "Base map",
-            layers: [this.state.osm]
-        });
 
         // Kuzzle layers
+        this.state.kuzzleLayer = new ol.layer.Vector({
+            type: 'base',
+            visible: false
+        });
         // TODO build map layer
 
         // this.state.groupKuzzleMap = new ol.layer.Group({
@@ -41,16 +42,25 @@ export default {
         // Build view
         this.state.view = new ol.View({
             zoom: this.state.zoom,
-            center:  new ol.geom.Point(this.state.coordinates).transform(this.state.projectionTo, this.state.projectionFrom).getCoordinates()
+            center: new ol.geom.Point(this.state.coordinates).transform(config.projectionTo, config.projectionFrom).getCoordinates()
         });
-
-        // var pointCenter = new ol.geom.Point([lon, lat]).transform(this.state.projectionTo, this.state.projectionFrom).getCoordinates();
 
         // Build Map
         this.state.map = new ol.Map({
-            // layers: [this.state.groupBaseMap/*, this.state.groupKuzzleMap*/],
-            layers: this.state.groupBaseMap,
+            layers: [this.state.osm, this.state.kuzzleLayer],
             target: 'map',
+            controls: ol.control.defaults({
+                attributionOptions: ({
+                    collapsible: false
+                })
+            }).extend([
+                new ol.control.MousePosition({
+                    coordinateFormat:  function(coordinate) {
+                        return ol.coordinate.format(coordinate, 'Lat : {y} / Long : {x}', 4);
+                    },
+                    projection: config.projectionTo
+                })
+            ]),
             view: this.state.view
         });
     }
