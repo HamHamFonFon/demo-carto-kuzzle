@@ -6,6 +6,7 @@
   "author": "Stephane MEAUDRE <smeaudre@kaliop.com>",
   "licence": "MIT",
   "dependencies": {
+    "express": "^4.15.2",
     "kuzzle-sdk": "^3.4.2",
     "lodash": "^4.17.4",
     "openlayers": "^4.0.1"
