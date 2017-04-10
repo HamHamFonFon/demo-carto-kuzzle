@@ -1,7 +1,6 @@
-process.traceDeprecation = true;
-
 const webpack = require('webpack');
 const path = require('path');
+process.traceDeprecation = true;
 
 module.exports = {
     entry: './dist/src/app.js',
@@ -21,6 +20,16 @@ module.exports = {
                 }
             }]
         }]
-    }
+    },
+    resolve: {
+        alias: {
+            ol: "openlayers/dist/ol.js"
+        }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            ol: "openlayers"
+        })
+    ]
 };
 

@@ -1,6 +1,5 @@
 import config from '../services/config'
 // import kuzzleBridge from './kuzzleBridge'
-import ol from 'openlayers'
 
 export default {
 
