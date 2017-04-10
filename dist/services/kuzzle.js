@@ -16,6 +16,8 @@ var optionsConnect = {
 var kuzzle = new Kuzzle(config.kuzzleUrl, optionsConnect, function(err, res) {
     if (err) {
         console.log(err.message);
+    } else {
+        console.log(res);
     }
 });
 
