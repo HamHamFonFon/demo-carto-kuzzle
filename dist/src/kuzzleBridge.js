@@ -1,5 +1,5 @@
-import kuzzle from './services/kuzzle'
-import config from './services/config'
+import kuzzle from '../services/kuzzle'
+import config from '../services/config'
 
 let kuzzleDocumentEntity = new KuzzleDocumentEntity();
 
