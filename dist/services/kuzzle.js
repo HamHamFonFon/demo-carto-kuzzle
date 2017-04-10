@@ -1,5 +1,5 @@
 /**
- * Connextion to Kuzzle
+ * Connexion to Kuzzle
  */
 import Kuzzle from 'kuzzle-sdk'
 import config from './config'
@@ -13,7 +13,7 @@ var optionsConnect = {
     }
 };
 
-var kuzzle = new Kuzzle(config.kuzzleUrl, optionsConnect, function(err, res) {
+kuzzle = new Kuzzle(config.kuzzleUrl, optionsConnect, function(err, res) {
     if (err) {
         console.log(err.message);
     } else {

@@ -1,3 +1,6 @@
 import map from './map';
-map.initMap();
+import kuzzleBridge from './kuzzleBridge'
+
+kuzzleBridge.loadDataFromKuzzle();
+// map.initMap();
 
