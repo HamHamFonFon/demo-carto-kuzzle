@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-process.traceDeprecation = true;
+
+// process.noDeprecation = true
 
 module.exports = {
     entry: './dist/src/app.js',
@@ -11,7 +12,7 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            exclude: '/node_modules/',
+            exclude: /node_modules/,
             use: [{
                 loader: 'babel-loader',
                 options: {
