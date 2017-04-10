@@ -22,7 +22,21 @@ cd demo-carto-kuzzle
 npm install
 ```
 
-Dev
+ Build
+-------------
+Compile the script with
+```
+npm run webpack
+```
+
+Launch htpp server : 
+```
+npm run start
+```
+
+Finally go to http://localhost:3333
+
+Only for developpers
 ------------
 You want using browserify also webback:
 
