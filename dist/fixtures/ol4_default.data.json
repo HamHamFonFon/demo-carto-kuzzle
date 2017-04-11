@@ -3,5 +3,8 @@
     "type": "Point",
     "coordinates": [3.9609146118164054, 43.624395670027354]
   },
-  "name": "Test"
+  "fields": {
+    "name": "Test",
+    "date_creation": "2017-04-10"
+  }
 }

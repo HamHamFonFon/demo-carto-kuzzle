@@ -1,12 +1,18 @@
 {
-  "properties": {
-    "location": {
-      "type": "geo_shape",
-      "tree": "quadtree",
-      "precision": "1m"
-    },
-    "name": {
-      "type": "string"
+  "location": {
+    "type": "geo_shape",
+    "tree": "quadtree",
+    "precision": "1m"
+  },
+  "fields": {
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "date_creation": {
+        "type": "date",
+        "format": "YYYY-mm-dd"
+      }
     }
   }
 }
