@@ -1,4 +1,4 @@
-import kuzzle from '../services/kuzzle'
+// import kuzzle from '../services/kuzzle'
 
 class KuzzleDocumentEntity {
 
@@ -9,17 +9,26 @@ class KuzzleDocumentEntity {
      */
     fromDocumentToFeature(document)
     {
+        var dataGeoJson = {};
 
-        var dataGeoJson = {
-            "id": null,
-            'type': 'Feature',
-            'geometry': null,
-            'properties': []
-        };
+        if (document) {
+            var datasGeometry = document._source.location;
+            var dataProperties = document._source.fields;
+
+            dataGeoJson = {
+                "id": document._id,
+                'type': 'Feature',
+                'geometry': datasGeometry,
+                'properties': dataProperties
+            };
+        }
 
         return dataGeoJson;
     }
 
+    /**
+     * Transform a feature into a kuzzle document
+     */
     fromFeatureToDocument()
     {
 

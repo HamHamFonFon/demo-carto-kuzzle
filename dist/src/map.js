@@ -26,18 +26,6 @@ export default {
         });
 
 
-        // Kuzzle layers
-        this.state.kuzzleLayer = new ol.layer.Vector({
-            type: 'base',
-            visible: false
-        });
-        // TODO build map layer
-
-        // this.state.groupKuzzleMap = new ol.layer.Group({
-        //     title: "Kuzzle maps",
-        //     layers: []
-        // });
-
         // Build view
         this.state.view = new ol.View({
             zoom: this.state.zoom,
@@ -46,7 +34,7 @@ export default {
 
         // Build Map
         this.state.map = new ol.Map({
-            layers: [this.state.osm, this.state.kuzzleLayer],
+            layers: [this.state.osm],
             target: 'map',
             controls: ol.control.defaults({
                 attributionOptions: ({
@@ -93,7 +81,6 @@ export default {
         // Add source to layer
         layer.setSource(kSource);
 
-        // Add layer to map
-        this.state.map.addLayer(layer);
+        return layer;
     }
 }
