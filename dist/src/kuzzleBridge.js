@@ -5,21 +5,27 @@ import config from '../services/config'
 
 export default {
 
+    state: {
+
+    },
+
     /**
-     *
+     * Load data and create a mapping layer
      */
     loadDataFromKuzzle()
     {
 
-        console.log(config);
-        kuzzle.collection(config.kuzzleCollection, config.kuzzleIndex).fetchAllDocuments((err, res) => {
-            if (err) {
-                console.log(err.message);
-            } else {
-                console.log(res);
-            }
-        });
+        var filter = {
+            from: 0,
+            size: 10000
+        };
 
+        kuzzle
+            .collection(config.kuzzleCollection, config.kuzzleIndex)
+            .searchPromise(filter)
+            .then(res => {
+                console.log(res);
+            });
     }
 
 }
