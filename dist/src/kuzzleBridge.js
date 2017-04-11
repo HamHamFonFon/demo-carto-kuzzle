@@ -1,7 +1,7 @@
 import kuzzle from '../services/kuzzle'
 import config from '../services/config'
 
-// let kuzzleDocumentEntity = new KuzzleDocumentEntity();
+let kuzzleDocumentEntity = new KuzzleDocumentEntity();
 
 export default {
 
@@ -14,7 +14,6 @@ export default {
      */
     loadDataFromKuzzle()
     {
-
         var filter = {
             from: 0,
             size: 10000
@@ -24,7 +23,11 @@ export default {
             .collection(config.kuzzleCollection, config.kuzzleIndex)
             .searchPromise(filter)
             .then(res => {
-                console.log(res);
+                listDataGeojson = res.documents.map(document => {
+                    return kuzzleDocumentEntity.fromDocumentToFeature(document);
+                });
+
+                console.log(listDataGeojson);
             });
     }
 
