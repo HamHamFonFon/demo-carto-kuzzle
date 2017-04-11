@@ -13,7 +13,6 @@ let loadMap = new Promise(
 
 loadMap.then((map) => {
     console.log(map);
-    //
    // kuzzleBridge.loadDataFromKuzzle();
 })
 .catch((reason) => {
