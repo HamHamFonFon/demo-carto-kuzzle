@@ -62,5 +62,38 @@ export default {
             ]),
             view: this.state.view
         });
+
+        return this.state.map;
+    },
+
+    /**
+     *
+     * @param listDataGeojson
+     * @param collection
+     */
+    buildKuzzleLayer(listDataGeojson, collection)
+    {
+        var layer = new ol.layer.Vector({
+            'title': collection,
+            'type': 'base',
+            'visible': true
+        });
+
+        var dataGeoJSON = {
+            "type": "FeatureCollection",
+            "features": listDataGeojson
+        };
+
+        // Transform geojson into source vector
+        var kGeoJSON = new ol.format.GeoJSON().readFeatures(dataGeoJSON, {featureProjection: config.projectionFrom});
+        var kSource = new ol.source.Vector({
+            features: kGeoJSON
+        });
+
+        // Add source to layer
+        layer.setSource(kSource);
+
+        // Add layer to map
+        this.state.map.addLayer(layer);
     }
 }

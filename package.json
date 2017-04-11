@@ -2,7 +2,7 @@
   "name": "demo-carto-kuzzle",
   "version": "0.2.0",
   "description": "Application de demo pour l article kuzzle-cartographie",
-  "main": "app.js",
+  "main": "main.js",
   "author": "Stephane MEAUDRE <smeaudre@kaliop.com>",
   "licence": "MIT",
   "dependencies": {
