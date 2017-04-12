@@ -5,8 +5,10 @@ import olMap from './map'
 import KuzzleDocumentEntity from './kuzzleDocumentEntity'
 // import kuzzleBridge from './kuzzleBridge'
 
+// Instance of KuzzleDocument to Feature
 let kuzzleDocumentEntityMock = new KuzzleDocumentEntity();
 
+// Create Promise
 let loadMap = new Promise(
     (resolve, object) => {
         resolve(olMap.initMap());
@@ -15,8 +17,11 @@ let loadMap = new Promise(
 
 loadMap.then((map) => {
 
-    var listGeoJsonMock = [];
+    let listGeoJsonMock = [];
 
+    // 1 : Get data from Kuzzle
+    // kuzzleBridge.loadDataFromKuzzle();
+    // resultKuzzleMock is a mock of a REST request on Kuzzle
     var resultKuzzleMock = {
         "requestId": "40b8a1bf-8af2-4ebc-aebc-f0efc29bafba",
         "status": 200,
@@ -44,25 +49,14 @@ loadMap.then((map) => {
                     "name": "Test",
                     "date_creation": "2017-04-10"
                 }
-            },
-            "_kuzzle_info": {
-                "author": "hamham",
-                "createdAt": 1491941290910,
-                "updatedAt": null,
-                "updater": null,
-                "active": true,
-                "deletedAt": null
             }
         }
     };
-
     listGeoJsonMock.push(kuzzleDocumentEntityMock.fromDocumentToFeature(resultKuzzleMock.result));
 
-    var layer = olMap.buildKuzzleLayer(listGeoJsonMock, resultKuzzleMock.collection);
-
-    console.log(layer);
-    map.addLayer(layer);
-   // kuzzleBridge.loadDataFromKuzzle();
+    // 2: create a layer from data and adding them into map
+    let kuzzleLayer = olMap.buildKuzzleLayer(listGeoJsonMock, resultKuzzleMock.collection);
+    map.addLayer(kuzzleLayer);
 })
 .catch((reason) => {
     console.log('Probleme: ' + reason);
