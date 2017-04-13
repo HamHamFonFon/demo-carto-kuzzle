@@ -23,4 +23,5 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+console.log('listen to port ' + 3330);
 app.listen(3330);

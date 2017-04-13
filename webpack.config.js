@@ -31,6 +31,9 @@ module.exports = {
         new webpack.ProvidePlugin({
             ol: "openlayers"
         })
-    ]
+    ],
+    node: {
+        fs: "empty"
+    }
 };
 
