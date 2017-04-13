@@ -1,5 +1,6 @@
 import kuzzle from '../services/kuzzle'
 import config from '../services/config'
+import KuzzleDocumentEntity from './kuzzleDocumentEntity'
 
 let kuzzleDocumentEntity = new KuzzleDocumentEntity();
 
@@ -18,6 +19,8 @@ export default {
             from: 0,
             size: 10000
         };
+
+        console.log(filter);
 
         kuzzle
             .collection(config.kuzzleCollection, config.kuzzleIndex)

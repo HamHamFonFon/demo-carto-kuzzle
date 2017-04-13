@@ -1,5 +1,4 @@
 import config from '../services/config'
-// import kuzzleBridge from './kuzzleBridge'
 
 export default {
 
@@ -14,6 +13,10 @@ export default {
         listStyleFeatures: []
     },
 
+    /**
+     * Initialisation of map
+     * @returns {null}
+     */
     initMap()
     {
         var this_ = this;
@@ -63,11 +66,11 @@ export default {
      * @param listDataGeojson
      * @param collection
      */
-    buildKuzzleLayer(listDataGeojson, collection)
+    buildKuzzleLayer(listDataGeojson, collectionName)
     {
         var this_ = this;
         var layer = new ol.layer.Vector({
-            'title': collection,
+            'title': collectionName,
             'type': 'base',
             'visible': true
         });
