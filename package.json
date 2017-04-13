@@ -6,10 +6,12 @@
   "author": "Stephane MEAUDRE <smeaudre@kaliop.com>",
   "licence": "MIT",
   "dependencies": {
+    "bufferutil": "^2.0.1",
     "express": "^4.15.2",
-    "kuzzle-sdk": "^3.4.2",
+    "kuzzle-sdk": "^4.0.0",
     "lodash": "^4.17.4",
-    "openlayers": "^4.0.1"
+    "openlayers": "^4.0.1",
+    "utf-8-validate": "^3.0.1"
   },
   "devDependencies": {
     "webpack": "^2.3.3",
