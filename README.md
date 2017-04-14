@@ -1,6 +1,8 @@
 Demonstration cartographie avec Kuzzle
 ===================
 
+[![Build Status](https://travis-ci.org/HamHamFonFon/demo-carto-kuzzle.svg?branch=develop)](https://travis-ci.org/HamHamFonFon/demo-carto-kuzzle)
+
 Plugin Status
 -------------
 Beta stage of development : v. 0.2.0
