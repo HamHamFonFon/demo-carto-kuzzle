@@ -12,17 +12,16 @@ class KuzzleDocumentEntity {
         var dataGeoJson = {};
 
         if (document) {
-            var datasGeometry = document._source.location;
-            var dataProperties = document._source.fields;
+            var datasGeometry = document.content.location;
+            var dataProperties = document.content.fields;
 
             dataGeoJson = {
-                "id": document._id,
+                "id": document.id,
                 'type': 'Feature',
                 'geometry': datasGeometry,
                 'properties': dataProperties
             };
         }
-
         return dataGeoJson;
     }
 

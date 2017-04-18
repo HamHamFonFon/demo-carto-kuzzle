@@ -7,7 +7,7 @@ let kuzzleDocumentEntity = new KuzzleDocumentEntity();
 export default {
 
     state: {
-
+        kuzzleData: null
     },
 
     /**
@@ -20,18 +20,27 @@ export default {
             size: 10000
         };
 
-        console.log(filter);
+        let this_ = this;
 
         kuzzle
             .collection(config.kuzzleCollection, config.kuzzleIndex)
-            .searchPromise(filter)
-            .then(res => {
-                listDataGeojson = res.documents.map(document => {
-                    return kuzzleDocumentEntity.fromDocumentToFeature(document);
-                });
-
-                console.log(listDataGeojson);
+            .search(filter, (err, res) => {
+                if (!err && 0 < res.total) {
+                    this_.state.kuzzleData = res.documents.map(document => {
+                        return kuzzleDocumentEntity.fromDocumentToFeature(document);
+                    });
+                } else {
+                    console.log(err.message);
+                }
             });
+            // .then(res => {
+            //     listDataGeojson = res.documents.map(document => {
+            //         return kuzzleDocumentEntity.fromDocumentToFeature(document);
+            //     });
+            //
+            // });
+
+        // console.log(listDataGeojson);
     }
 
 }
