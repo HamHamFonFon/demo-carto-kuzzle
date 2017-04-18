@@ -5,24 +5,28 @@ import olMap from './map'
 import kuzzleBridge from './kuzzleBridge'
 import config from '../services/config';
 
+/**
+ * @param ol.Map()
+ */
+let map = olMap.initMap();
+
 // Create Promise
 let loadMap = new Promise(
     (resolve, object) => {
-        resolve(olMap.initMap());
+        resolve(kuzzleBridge.loadDataFromKuzzle());
     }
 );
 
 // Retrieve data and push on map
-loadMap.then((map) => {
+loadMap.then((data) => {
 
-    // 1 : Get data from Kuzzle
-    kuzzleBridge.loadDataFromKuzzle();
+    console.log(data); // -> pk retourne null ?
 
     // 2: create a layer from data and adding them into map
-    console.log(kuzzleBridge.state.kuzzleData);
-    let kuzzleLayer = olMap.buildKuzzleLayer(kuzzleBridge.state.kuzzleData, config.collection);
+    let kuzzleLayer = olMap.buildKuzzleLayer(data, config.collection);
+
     map.addLayer(kuzzleLayer);
 })
 .catch((reason) => {
-    console.log('Probleme: ' + reason);
+    console.log('Problem: ' + reason);
 });

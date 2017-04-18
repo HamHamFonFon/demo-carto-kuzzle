@@ -15,11 +15,6 @@ export default {
      */
     loadDataFromKuzzle()
     {
-        var filter = {
-            from: 0,
-            size: 10000
-        };
-
         let this_ = this;
 
         // Callback function
@@ -28,6 +23,8 @@ export default {
                 this_.state.kuzzleData = res.documents.map(document => {
                     return kuzzleDocumentEntity.fromDocumentToFeature(document);
                 });
+
+                console.log(this_.state.kuzzleData);
             } else {
                 console.log(err.message);
             }
@@ -36,17 +33,13 @@ export default {
         // Search function
         kuzzle
             .collection(config.kuzzleCollection, config.kuzzleIndex)
-            .search(filter, this.cb);
+            .search({
+                from: 0,
+                size: 10000
+            }, this.cb);
 
-
-            // .searchPromise({})
-            // .then(res => {
-            //     this_.state.kuzzleData = res.documents.map(document => {
-            //         return kuzzleDocumentEntity.fromDocumentToFeature(document);
-            //     });
-            // });
-
-        // console.log(listDataGeojson);
+        // ?? comment retourner les datas ds la promise ???
+        return this.state.kuzzleData;
     }
 
 }

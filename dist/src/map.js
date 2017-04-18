@@ -10,7 +10,8 @@ export default {
         coordinates: null,
         groupBaseMap: null,
         groupKuzzleMap: null,
-        listStyleFeatures: []
+        listStyleFeatures: [],
+        zindex: 20
     },
 
     /**
@@ -19,7 +20,6 @@ export default {
      */
     initMap()
     {
-        var this_ = this;
         this.state.coordinates = [config.longDefault, config.latDefault];
 
         this.state.listStyleFeatures = this.setStylesFeature();
@@ -75,26 +75,29 @@ export default {
             'visible': true
         });
 
-        var dataGeoJSON = {
-            "type": "FeatureCollection",
-            "features": listDataGeojson
-        };
+        if (0 < listDataGeojson.length) {
+            var dataGeoJSON = {
+                "type": "FeatureCollection",
+                "features": listDataGeojson
+            };
 
-        // Transform geojson into source vector
-        var kGeoJSON = new ol.format.GeoJSON().readFeatures(dataGeoJSON, {featureProjection: config.projectionFrom});
-        var kSource = new ol.source.Vector({
-            features: kGeoJSON
-        });
+            // Transform geojson into source vector
+            var kGeoJSON = new ol.format.GeoJSON().readFeatures(dataGeoJSON, {featureProjection: config.projectionFrom});
+            var kSource = new ol.source.Vector({
+                features: kGeoJSON
+            });
 
-        // Add source to layer
-        layer.setSource(kSource);
-        layer.setZIndex(20);
+            // Add source to layer
+            layer.setSource(kSource);
+        }
+
+        // Set a z-index value
+        layer.setZIndex(this.state.zindex);
 
         // Add style
         layer.setStyle(function(feature, resolution) {
             return this_.state.listStyleFeatures[feature.getGeometry().getType()]
         });
-
 
         return layer;
     },
