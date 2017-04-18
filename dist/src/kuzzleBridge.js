@@ -22,22 +22,28 @@ export default {
 
         let this_ = this;
 
+        // Callback function
+        this.cb = (err, res) => {
+            if (!err && 0 < res.total) {
+                this_.state.kuzzleData = res.documents.map(document => {
+                    return kuzzleDocumentEntity.fromDocumentToFeature(document);
+                });
+            } else {
+                console.log(err.message);
+            }
+        };
+
+        // Search function
         kuzzle
             .collection(config.kuzzleCollection, config.kuzzleIndex)
-            .search(filter, (err, res) => {
-                if (!err && 0 < res.total) {
-                    this_.state.kuzzleData = res.documents.map(document => {
-                        return kuzzleDocumentEntity.fromDocumentToFeature(document);
-                    });
-                } else {
-                    console.log(err.message);
-                }
-            });
+            .search(filter, this.cb);
+
+
+            // .searchPromise({})
             // .then(res => {
-            //     listDataGeojson = res.documents.map(document => {
+            //     this_.state.kuzzleData = res.documents.map(document => {
             //         return kuzzleDocumentEntity.fromDocumentToFeature(document);
             //     });
-            //
             // });
 
         // console.log(listDataGeojson);

@@ -88,6 +88,7 @@ export default {
 
         // Add source to layer
         layer.setSource(kSource);
+        layer.setZIndex(20);
 
         // Add style
         layer.setStyle(function(feature, resolution) {
