@@ -14,7 +14,7 @@
     "utf-8-validate": "^3.0.1"
   },
   "devDependencies": {
-    "webpack": "^2.3.3",
+    "webpack": "^2.4.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
