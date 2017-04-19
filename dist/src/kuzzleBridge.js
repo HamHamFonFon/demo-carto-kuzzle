@@ -15,16 +15,12 @@ export default {
      */
     loadDataFromKuzzle()
     {
-        let this_ = this;
-
         // Callback function
         this.cb = (err, res) => {
             if (!err && 0 < res.total) {
-                this_.state.kuzzleData = res.documents.map(document => {
+                this.state.kuzzleData = res.documents.map(document => {
                     return kuzzleDocumentEntity.fromDocumentToFeature(document);
                 });
-
-                console.log(this_.state.kuzzleData);
             } else {
                 console.log(err.message);
             }
@@ -38,6 +34,7 @@ export default {
                 size: 10000
             }, this.cb);
 
+        console.log(this.state.kuzzleData);
         // ?? comment retourner les datas ds la promise ???
         return this.state.kuzzleData;
     }
