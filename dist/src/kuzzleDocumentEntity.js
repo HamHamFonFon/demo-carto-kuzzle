@@ -9,11 +9,11 @@ class KuzzleDocumentEntity {
      */
     fromDocumentToFeature(document)
     {
-        var dataGeoJson = {};
+        let dataGeoJson = {};
 
         if (document) {
-            var datasGeometry = document.content.location;
-            var dataProperties = document.content.fields;
+            let datasGeometry = document.content.location;
+            let dataProperties = document.content.fields;
 
             dataGeoJson = {
                 "id": document.id,

@@ -27,16 +27,12 @@ export default {
         };
 
         // Search function
-        kuzzle
+        return kuzzle
             .collection(config.kuzzleCollection, config.kuzzleIndex)
             .search({
                 from: 0,
                 size: 10000
             }, this.cb);
-
-        console.log(this.state.kuzzleData);
-        // ?? comment retourner les datas ds la promise ???
-        return this.state.kuzzleData;
     }
 
 }

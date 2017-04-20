@@ -10,6 +10,7 @@ export default {
         coordinates: null,
         groupBaseMap: null,
         groupKuzzleMap: null,
+        kuzzleLayer: null,
         listStyleFeatures: [],
         zindex: 20
     },
@@ -20,8 +21,10 @@ export default {
      */
     initMap()
     {
+        // Default coordinates
         this.state.coordinates = [config.longDefault, config.latDefault];
 
+        // Styles of features
         this.state.listStyleFeatures = this.setStylesFeature();
 
         // OpenStreetmap base map
@@ -33,6 +36,10 @@ export default {
         });
 
 
+        // Kuzzle Layer (empty layer)
+        let kuzzleLayer  = this.buildKuzzleLayer();
+        this.setStylesFeature(kuzzleLayer);
+
         // Build view
         this.state.view = new ol.View({
             zoom: this.state.zoom,
@@ -41,7 +48,7 @@ export default {
 
         // Build Map
         this.state.map = new ol.Map({
-            layers: [this.state.osm],
+            layers: [this.state.osm, this.state.kuzzleLayer],
             target: 'map',
             controls: ol.control.defaults({
                 attributionOptions: ({
@@ -66,40 +73,39 @@ export default {
      * @param listDataGeojson
      * @param collection
      */
-    buildKuzzleLayer(listDataGeojson, collectionName)
+    buildKuzzleLayer()
     {
-        var this_ = this;
-        var layer = new ol.layer.Vector({
-            'title': collectionName,
+        let kuzzleLayer = new ol.layer.Vector({
+            'title': config.kuzzleCollection,
             'type': 'base',
             'visible': true
         });
 
-        if (0 < listDataGeojson.length) {
-            var dataGeoJSON = {
-                "type": "FeatureCollection",
-                "features": listDataGeojson
-            };
-
-            // Transform geojson into source vector
-            var kGeoJSON = new ol.format.GeoJSON().readFeatures(dataGeoJSON, {featureProjection: config.projectionFrom});
-            var kSource = new ol.source.Vector({
-                features: kGeoJSON
-            });
-
-            // Add source to layer
-            layer.setSource(kSource);
-        }
+        // if (0 < listDataGeojson.length) {
+        //     var dataGeoJSON = {
+        //         "type": "FeatureCollection",
+        //         "features": listDataGeojson
+        //     };
+        //
+        //     // Transform geojson into source vector
+        //     var kGeoJSON = new ol.format.GeoJSON().readFeatures(dataGeoJSON, {featureProjection: config.projectionFrom});
+        //     var kSource = new ol.source.Vector({
+        //         features: kGeoJSON
+        //     });
+        //
+        //     // Add source to layer
+        //     kuzzleLayer.setSource(kSource);
+        // }
 
         // Set a z-index value
-        layer.setZIndex(this.state.zindex);
+        kuzzleLayer.setZIndex(this.state.zindex);
 
         // Add style
-        layer.setStyle(function(feature, resolution) {
-            return this_.state.listStyleFeatures[feature.getGeometry().getType()]
+        kuzzleLayer.setStyle(function(feature, resolution) {
+            return this.state.listStyleFeatures[feature.getGeometry().getType()]
         });
 
-        return layer;
+        return kuzzleLayer;
     },
 
 
@@ -146,5 +152,23 @@ export default {
                 })
             })]
         };
+    },
+
+    /**
+     *
+     */
+    setKuzzleLayer(layer)
+    {
+        this.state.kuzzleLayer = layer;
+    },
+
+    /**
+     *
+     * @returns {*}
+     */
+    getKuzzleLayer()
+    {
+        return this.state.kuzzleLayer;
     }
+
 }
