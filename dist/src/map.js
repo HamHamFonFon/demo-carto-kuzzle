@@ -37,8 +37,8 @@ export default {
 
 
         // Kuzzle Layer (empty layer)
-        let kuzzleLayer  = this.buildKuzzleLayer();
-        this.setStylesFeature(kuzzleLayer);
+        let kuzzleLayer = this.buildKuzzleLayer();
+        this.setKuzzleLayer(kuzzleLayer);
 
         // Build view
         this.state.view = new ol.View({
